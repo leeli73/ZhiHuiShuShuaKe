@@ -47,19 +47,13 @@ func main() {
 	fmt.Println("技术支持来自：Lee QQ:925776327")
 	fmt.Println("项目整体开源,欢迎Fork和Star 项目地址:https://github.com/leeli73/ZhiHuiShuShuaKe")
 	fmt.Println("你也可以通过Tampermonkey、Fiddler等软件，向网页中注入上面Git项目中的Code.js")
+	fmt.Println("如果需要Server版，请联系上面的QQ")
+	fmt.Println("如果出现报错代码请不用管他。程序会自动热重启。")
 	proxy.Verbose = false
-	
-	proxy.OnRequest().HandleConnect(goproxy.AlwaysMitm)
 	proxy.OnRequest().DoFunc(
 		func(r *http.Request,ctx *goproxy.ProxyCtx)(*http.Request,*http.Response) {
 			r.Header.Set("X-GoProxy","yxorPoG-X")
 			return r,nil
-	})
-	proxy.OnRequest(goproxy.DstHostIs("eol.qhu.edu.cn")).DoFunc(
-    func(r *http.Request,ctx *goproxy.ProxyCtx)(*http.Request,*http.Response) {
-        return r,goproxy.NewResponse(r,
-			goproxy.ContentTypeText,http.StatusForbidden,
-			"Don't waste your time!")
 	})
 	proxy.OnResponse().DoFunc(
 		func(r *http.Response, ctx *goproxy.ProxyCtx)*http.Response{
